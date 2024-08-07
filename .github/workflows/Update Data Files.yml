@@ -1,13 +1,10 @@
 name: R script workflow
+
 on:
   push:
   schedule:
     - cron: '0 13 * * 1-5'
 
-  
-
-
-    
 jobs:
   run_r_script:
     runs-on: ubuntu-latest
@@ -17,7 +14,10 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-
+    - name: Install Node.js 20
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20'
 
     - name: Install system dependencies for R packages
       run: |
@@ -25,7 +25,6 @@ jobs:
 
     - name: Update CA certificates
       run: update-ca-certificates
-
   
     - name: Run R script
       env:
